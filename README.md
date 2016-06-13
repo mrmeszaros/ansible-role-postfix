@@ -2,9 +2,9 @@ Repleo ansible-role-postfix
 ==============
 
 [![Build Status](http://img.shields.io/travis/repleo/ansible-role-postfix.svg?style=flat-square)](https://travis-ci.org/repleo/ansible-role-postfix)
-[![Galaxy](http://img.shields.io/badge/galaxy-ansible-role-postfix-blue.svg?style=flat-square)](https://galaxy.ansible.com/list#/roles/914)
+[![Galaxy](http://img.shields.io/badge/galaxy-repleo.postfix-blue.svg?style=flat-square)](https://galaxy.ansible.com/repleo/postfix)
 
-Ansible role which manage postfix
+Ansible role to install SMTP / MTA postfix
 
 #### Requirements
 

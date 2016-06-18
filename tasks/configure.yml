@@ -4,6 +4,10 @@
   file: path=/etc/postfix owner=root
   notify: postfix restart
 
+- name: Ensure /etc/postfix/tls directory exists
+  file: path=/etc/postfix/tls owner=root state=directory mode=0755
+  notify: postfix restart
+
 - name: Configure postfix pt. 1
   template: src={{item}}.j2 dest=/etc/postfix/{{item}} owner=root group=root mode=0644
   notify: postfix restart
@@ -41,3 +45,51 @@
   template: src=sender_canonical_maps.j2 dest=/etc/postfix/sender_canonical_maps
   when: postfix_rewrite_sender_address != ""
   notify: postfix restart
+
+
+- name: Ensure /etc/postfix/sasl directory exists
+  file: path=/etc/postfix/sasl owner=root state=directory mode=0755
+  when: postfix_smtpd_auth_sasl_enable is defined
+
+- name: Configure postfix sasl authentication
+  template: src=sasl_smtpd.conf.j2 dest=/etc/postfix/sasl/smtpd.conf
+  when: postfix_smtpd_auth_sasl_enable is defined
+  notify: postfix restart
+
+- name: Add postfix user to sasl group
+  action: user name=postfix groups="sasl" append=yes
+  when: postfix_smtpd_auth_sasl_enable is defined
+
+- name: Configure saslauthd
+  template: src=saslauthd.j2 dest=/etc/default/saslauthd
+  when: postfix_smtpd_auth_sasl_enable is defined
+  notify: saslauthd restart
+
+
+- name: Check if lock file exists
+  stat: path=/etc/spamassassin/initial_bayes_db_loaded
+  register: initialdb
+
+- name: Configure Database Spamassassin
+  copy: src=spamassassin.bayes dest=/tmp/spamassassin.bayes
+  when: not initialdb.stat.exists 
+
+- name: Load initial spamassassin bayes database
+  command: sa-learn --dbpath /var/lib/spamassassin/.spamassassin/ --restore /tmp/spamassassin.bayes
+  when: not initialdb.stat.exists 
+
+- name: Restore rights spamassassin directory
+  file: path=/var/lib/spamassassin/.spamassassin state=directory recurse=yes owner=debian-spamd group=debian-spamd
+  when: not initialdb.stat.exists 
+
+- name: create lock file
+  file: path=/etc/spamassassin/initial_bayes_db_loaded state=touch owner=root group=root mode=0555
+  when: not initialdb.stat.exists 
+
+- name: remove spamassassin bayes database file
+  file: path=/tmp/spamassassin.bayes state=absent
+
+- name: Configure Spamassassin
+  replace: dest=/etc/spamassassin/local.cf regexp='\# rewrite_header Subject \*\*\*\*\*\SPAM\*\*\*\*\*' replace='rewrite_header Subject *****SPAM detected by smtp.repleo.nl*****'
+
+

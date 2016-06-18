@@ -1,8 +1,8 @@
 repleo.postfix - Ansible role for installing postfix SMTP with SSL and Spam filter support
 ==============
 
-[![Build Status](http://img.shields.io/travis/repleo/repleo.postfix.svg?style=flat-square)](https://travis-ci.org/repleo/repleo.postfix)
-[![Galaxy](http://img.shields.io/badge/galaxy-repleo.postfix-blue.svg?style=flat-square)]()
+[![Build Status](http://img.shields.io/travis/repleo/ansible-role-postfix.svg?style=flat-square)](https://travis-ci.org/repleo/ansible-role-postfix)
+[![Ansible Galaxy](http://img.shields.io/badge/galaxy-repleo.postfix-660198.svg?style=flat)](https://galaxy.ansible.com/repleo/postfix)
 
 Ansible role which manage postfix. It allows you to create a full SMTP server with TLS/SSL and STARTSSL support. Spamassassin is also installed for filtering SPAM. It comes with a bayesian db with 10 year Spam experience.
 

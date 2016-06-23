@@ -1,6 +1,10 @@
 # Change Log
 The postfix ansible installation change history
 
+## [4.0.1] - Release 2016-06 23
+
+* Added restart for spamassassin
+
 ## [4.0.0] - Release 2016-06-17
 
 * Added spamassassin

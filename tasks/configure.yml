@@ -88,8 +88,9 @@
 
 - name: remove spamassassin bayes database file
   file: path=/tmp/spamassassin.bayes state=absent
+  notify: spamassassin restart
 
 - name: Configure Spamassassin
   replace: dest=/etc/spamassassin/local.cf regexp='\# rewrite_header Subject \*\*\*\*\*\SPAM\*\*\*\*\*' replace='rewrite_header Subject *****SPAM detected by smtp.repleo.nl*****'
-
+  notify: spamassassin restart
 

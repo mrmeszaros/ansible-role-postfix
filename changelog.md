@@ -1,6 +1,11 @@
 # Change Log
 The postfix ansible installation change history
 
+
+## [4.1.1] - Release 2016-08-03
+
+* Enable start of spammassassin at boot
+
 ## [4.1.0] - Release 2016-07-02
 
 * Added support for postfix_relay_domains

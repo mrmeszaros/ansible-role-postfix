@@ -12,7 +12,7 @@
   service: name=saslauthd state=restarted
 
 - name: spamassassin restart
-  service: name=spamassassin state=restarted
+  service: name=spamassassin state=restarted enabled=yes
 
 - name: "postfix send test mail"
   shell: echo "Test mail from new/updated postfix at" `hostname` | mail {{postfix_send_test_mail_to}} -s "Test SMTP `hostname`"

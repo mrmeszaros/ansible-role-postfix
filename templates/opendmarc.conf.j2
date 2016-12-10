@@ -1,0 +1,14 @@
+AuthservID {{ postfix_dmarc_host }}
+PidFile /var/run/opendmarc.pid #Debian default
+RejectFailures false
+Syslog true
+TrustedAuthservIDs {{ postfix_dmarc_host }}
+UMask 0002
+UserID opendmarc:opendmarc
+IgnoreHosts /etc/opendmarc/ignore.hosts
+HistoryFile /var/run/opendmarc/opendmarc.dat
+
+Socket inet:54321@localhost
+
+#for testing:
+SoftwareHeader true

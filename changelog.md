@@ -1,6 +1,11 @@
 # Change Log
 The postfix ansible installation change history
 
+## [4.1.2] - Release 2016-12-10
+* Added DMARC support
+* Multi-domain DKIM support
+* Fixed sending mail with TLS support
+* Added SPF support to postfix
 
 ## [4.1.1] - Release 2016-08-03
 

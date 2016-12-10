@@ -1,0 +1,12 @@
+---
+- name: Configure OpenDMARC
+  template: src=opendmarc.conf.j2 dest=/etc/opendmarc.conf owner=root group=root mode=0644
+  notify: opendmarc restart
+
+- name: Ensure /etc/opendmarc directory exists
+  file: path=/etc/opendmarc owner=root state=directory mode=0755
+  notify: opendmarc restart
+
+- name: Configure /etc/opendmarc/ignore.hosts
+  template: src=ignore.hosts.j2 dest=/etc/opendmarc/ignore.hosts owner=root group=root mode=0644
+  notify: opendmarc restart

@@ -1,0 +1,5 @@
+---
+
+- name: Configure policyd-spf
+  template: src=policyd-spf.conf.j2 dest=/etc/postfix-policyd-spf-python/policyd-spf.conf owner=root group=root mode=0644
+  notify: postfix restart

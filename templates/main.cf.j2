@@ -13,6 +13,8 @@ readme_directory = no
 
 # TLS parameters
 {% if postfix_smtpd_use_tls %}
+smtp_use_tls=yes
+smtp_tls_security_level=may
 smtpd_use_tls=yes
 smtpd_tls_cert_file={{ postfix_tls_cert_file }}
 smtpd_tls_key_file={{ postfix_tls_key_file }}
@@ -47,11 +49,11 @@ smtpd_sasl_local_domain =
 
 smtpd_sasl_security_options = noanonymous
 
-# Support broken clients like Microsoft Outlook Express 4.x 
+# Support broken clients like Microsoft Outlook Express 4.x
 # which expect AUTH=LOGIN instead of AUTH LOGIN
 broken_sasl_auth_clients = yes
 
-# Add a sasl authenticated header so that 
+# Add a sasl authenticated header so that
 # spamassassin knows the user was checked
 smtpd_sasl_authenticated_header = yes
 {% endif %}
@@ -61,11 +63,6 @@ smtp_sasl_auth_enable = yes
 smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
 smtp_sasl_security_options =
 
-{% if postfix_smtp_use_tls %}
-smtp_use_tls = yes
-smtp_tls_security_level = encrypt
-smtp_tls_CAfile = {{ postfix_smtp_tls_cafile }}
-{% endif %}
 {% endif %}
 
 {% if postfix_relayhost %}
@@ -94,8 +91,14 @@ mailbox_command = /usr/bin/maildrop -d ${USER}
 {% if postfix_dkim %}
 milter_protocol = 2
 milter_default_action = accept
-smtpd_milters = inet:localhost:12301
-non_smtpd_milters = inet:localhost:12301
+smtpd_milters=inet:localhost:12301{% if postfix_dmarc %},inet:localhost:54321{% endif %}
+
+non_smtpd_milters=inet:localhost:12301{% if postfix_dmarc %},inet:localhost:54321{% endif %}
+{% endif %}
+
+{% if postfix_spf %}
+policy-spf_time_limit = 3600s
+smtpd_recipient_restrictions = permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination,check_policy_service unix:private/policy-spf
 {% endif %}
 
 # Queue

@@ -9,6 +9,12 @@
   - spamassassin
   - spamc
 
+- name: Install SPF (Debian)
+  apt: name={{item}}
+  when: postfix_spf
+  with_items:
+  - postfix-policyd-spf-python
+
 - name: Install sasl requirements (Debian)
   apt: name={{item}}
   with_items:
@@ -23,6 +29,12 @@
   with_items:
   - opendkim
   - opendkim-tools
+
+- name: Install DMARC requirements (Debian)
+  apt: name={{item}}
+  when: postfix_dmarc
+  with_items:
+  - opendmarc
 
 - name: Install postfix-pcre
   apt: pkg=postfix-pcre

@@ -12,6 +12,12 @@
 - include: opendkim.yml
   when: postfix_dkim
 
+- include: opendmarc.yml
+  when: postfix_dmarc
+
+- include: postfix_spf.yml
+  when: postfix_spf
+
 - include: configure.yml
 
 - name: Ensure Postfix is started

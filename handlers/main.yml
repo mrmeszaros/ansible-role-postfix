@@ -4,7 +4,11 @@
   service: name=postfix state=restarted
   notify: postfix send test mail
 
-- name: postfix opendkim restart
+- name: opendmarc restart
+  service: name=opendmarc state=restarted
+  notify: postfix send test mail
+
+- name: opendkim restart
   service: name=opendkim state=restarted
   notify: postfix send test mail
 

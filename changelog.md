@@ -1,6 +1,9 @@
 # Change Log
 The postfix ansible installation change history
 
+## [4.2.0] - Release 2017-0506
+* added mailbox_size parameter
+
 ## [4.1.2] - Release 2016-12-10
 * Added DMARC support
 * Multi-domain DKIM support

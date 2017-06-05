@@ -9,6 +9,8 @@ postfix_smtp_sasl_auth_enable:
 postfix_smtp_tls_cafile: "/etc/ssl/certs/Thawte_Premium_Server_CA.pem"
 postfix_smtp_use_tls: yes
 
+postfix_mailbox_size = 50000000
+
 #postfix_smtpd_auth_sasl_enable
 
 postfix_relayhost:

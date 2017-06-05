@@ -32,7 +32,8 @@ postfix_mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
 postfix_local_recipient_map: ""
 postfix_relay_domains: 
 
-postfix_mailbox_size: 50000000
+postfix_mailbox_size: 0
+postfix_message_size: 50240000
 
 postfix_generic_maps: ""
 

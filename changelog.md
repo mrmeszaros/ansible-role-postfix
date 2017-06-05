@@ -1,8 +1,9 @@
 # Change Log
 The postfix ansible installation change history
 
-## [4.2.1] - Release 2017-0506
+## [4.2.3] - Release 2017-05-06
 * added mailbox_size parameter
+* added message_size parameter
 
 ## [4.1.2] - Release 2016-12-10
 * Added DMARC support

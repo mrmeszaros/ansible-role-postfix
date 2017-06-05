@@ -10,7 +10,6 @@ biff = no
 append_dot_mydomain = no
 
 readme_directory = no
-mailbox_size_limit = {{postfix_mailbox_size}}
 
 # TLS parameters
 {% if postfix_smtpd_use_tls %}
@@ -73,7 +72,9 @@ relayhost = {{postfix_relayhost}}
 relay_domains = {{postfix_relay_domains}}
 {% endif %}
 mynetworks = {{postfix_mynetworks}}
-mailbox_size_limit = 0
+message_size_limit = {{postfix_message_size}}
+mailbox_size_limit = {{postfix_mailbox_size}}
+
 recipient_delimiter = +
 inet_interfaces = {{postfix_inet_interfaces}}
 

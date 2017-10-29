@@ -44,6 +44,7 @@ postfix_use_procmail: no
 # Install opendkim and setup postfix to use DKIM
 postfix_dkim: no
 postfix_dkim_domain: "{{inventory_hostname}}"
+postfix_dkim_key_bits: 2048
 
 # Relay all mail going to local users (e.g. root or cron) to another mail address
 postfix_local_user_relay_address: ""

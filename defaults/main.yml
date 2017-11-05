@@ -33,6 +33,7 @@ postfix_spf: no
 # Install opendkim and setup postfix to use DKIM
 postfix_dkim: no
 postfix_dkim_domains:
+postfix_dkim_key_bits: 2048
 
 # Install opendmarc and setup postfix to use DMARC
 postfix_dmarc: no

@@ -21,7 +21,7 @@
   notify: opendkim restart
 
 - name: Generate DKIM keys
-  command: opendkim-genkey -s mail -d "{{ item }}"
+  command: opendkim-genkey -s mail -b "{{ postfix_dkim_key_bits }}" -d "{{ item }}"
   args:
     chdir: "/etc/opendkim/{{ item }}"
     creates: "/etc/opendkim/{{ item }}/mail.private"

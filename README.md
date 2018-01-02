@@ -22,18 +22,17 @@ postfix_smtp_sasl_auth_enable:
 postfix_smtp_tls_cafile: "/etc/ssl/certs/Thawte_Premium_Server_CA.pem"
 postfix_smtp_use_tls: yes
 
-#Define to enable auth_sasl
-#postfix_smtpd_auth_sasl_enable
+postfix_mailbox_size: 0
+postfix_message_size: 50240000
+
+# postfix_smtpd_auth_sasl_enable
 
 postfix_relayhost:
 postfix_mynetworks: "127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128"
 postfix_inet_interfaces: loopback-only
 postfix_mydestination: $mydomain, $myhostname, localhost.$mydomain, localhost
 postfix_local_recipient_map: ""
-postfix_relay_domains: 
-
-postfix_mailbox_size: 0
-postfix_message_size: 50240000
+postfix_relay_domains:
 
 postfix_generic_maps: ""
 
@@ -41,10 +40,18 @@ postfix_generic_maps: ""
 postfix_use_maildrop: no
 postfix_use_procmail: no
 
+# Install postfix_spf and setup postfix to use SPF
+postfix_spf: no
+
 # Install opendkim and setup postfix to use DKIM
 postfix_dkim: no
-postfix_dkim_domain: "{{inventory_hostname}}"
+postfix_dkim_domains:
 postfix_dkim_key_bits: 2048
+
+# Install opendmarc and setup postfix to use DMARC
+postfix_dmarc: no
+postfix_dmarc_host:
+postfix_dmarc_domains:
 
 # Relay all mail going to local users (e.g. root or cron) to another mail address
 postfix_local_user_relay_address: ""
@@ -58,7 +65,6 @@ postfix_send_test_mail_to: ""
 
 postfix_smtp_sasl_user: "{{ansible_ssh_user}}"
 postfix_smtp_sasl_password: ""
-```
 
 # Queue
 bounce_queue_lifetime: 1h
@@ -71,7 +77,7 @@ postfix_tls_generate: False
 postfix_ssl_subject: ""
 postfix_tls_cert_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
 postfix_tls_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
-
+```
 
 #### Usage
 

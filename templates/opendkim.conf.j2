@@ -13,7 +13,7 @@ UMask                   002
 Socket                  inet:12301@localhost
 
 KeyTable                /etc/opendkim/key_table
-SigningTable            /etc/opendkim/signing_table
+SigningTable            refile:/etc/opendkim/signing_table
 ExternalIgnoreList      /etc/opendkim/trusted_hosts
 InternalHosts           /etc/opendkim/trusted_hosts
 AutoRestart             Yes

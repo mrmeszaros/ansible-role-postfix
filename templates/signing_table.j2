@@ -3,5 +3,5 @@
 # Do NOT modify this file by hand!
 
 {% for domain in postfix_dkim_domains %}
-{{ domain }} mail._domainkey.{{ domain }}
+*@{{ domain }} mail._domainkey.{{ domain }}
 {% endfor %}

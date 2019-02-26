@@ -1,41 +1,40 @@
 ---
 
 - name: Install requirements (Debian)
-  apt: name={{ item }}
-  with_items:
-  - postfix
-  - ca-certificates
-  - mailutils
-  - spamassassin
-  - spamc
+  apt:
+    name:
+      - postfix
+      - ca-certificates
+      - mailutils
+      - spamassassin
+      - spamc
 
 - name: Install SPF (Debian)
-  apt: name={{ item }}
+  apt:
+    name: postfix-policyd-spf-python
   when: postfix_spf
-  with_items:
-  - postfix-policyd-spf-python
 
 - name: Install sasl requirements (Debian)
-  apt: name={{ item }}
-  with_items:
-  - libsasl2-2
-  - sasl2-bin
-  - libsasl2-modules
+  apt:
+    name:
+      - libsasl2-2
+      - sasl2-bin
+      - libsasl2-modules
   when: postfix_smtpd_auth_sasl_enable is defined
 
 - name: Install DKIM requirements (Debian)
-  apt: name={{ item }}
+  apt:
+    name:
+      - opendkim
+      - opendkim-tools
   when: postfix_dkim
-  with_items:
-  - opendkim
-  - opendkim-tools
 
 - name: Install DMARC requirements (Debian)
-  apt: name={{ item }}
+  apt:
+    name: opendmarc
   when: postfix_dmarc
-  with_items:
-  - opendmarc
 
-- name: Install postfix-pcre
-  apt: pkg=postfix-pcre
+- name: Install PCRE [Perl Compatible Reg. Exp.] (Debian)
+  apt:
+    name: postfix-pcre
   when: postfix_rewrite_sender_address

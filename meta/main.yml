@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Jeroen Arnoldus
-  description: Ansible role for installing postfix SMTP with spamassassin 
+  description: Ansible role for installing postfix SMTP with spamassassin
   company: Repleo, Amstelveen, Holland
   license: GPLv3
   min_ansible_version: 2.0
@@ -15,10 +15,11 @@ galaxy_info:
   galaxy_tags:
     - postfix
     - smtp
-    - SSL/TLS
-    - STARTLS
-    - Spamassassin
-    - MTA
+    - ssl
+    - tls
+    - startls
+    - spamassassin
+    - mta
     - mail
     - server
 dependencies: []

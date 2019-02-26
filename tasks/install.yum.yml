@@ -1,7 +1,7 @@
 ---
 
 - name: Install requirements (RedHat)
-  yum: name={{item}}
+  yum: name={{ item }}
   with_items:
   - postfix
   - ca-certificates

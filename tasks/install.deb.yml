@@ -1,7 +1,7 @@
 ---
 
 - name: Install requirements (Debian)
-  apt: name={{item}}
+  apt: name={{ item }}
   with_items:
   - postfix
   - ca-certificates
@@ -10,13 +10,13 @@
   - spamc
 
 - name: Install SPF (Debian)
-  apt: name={{item}}
+  apt: name={{ item }}
   when: postfix_spf
   with_items:
   - postfix-policyd-spf-python
 
 - name: Install sasl requirements (Debian)
-  apt: name={{item}}
+  apt: name={{ item }}
   with_items:
   - libsasl2-2
   - sasl2-bin
@@ -24,18 +24,18 @@
   when: postfix_smtpd_auth_sasl_enable is defined
 
 - name: Install DKIM requirements (Debian)
-  apt: name={{item}}
+  apt: name={{ item }}
   when: postfix_dkim
   with_items:
   - opendkim
   - opendkim-tools
 
 - name: Install DMARC requirements (Debian)
-  apt: name={{item}}
+  apt: name={{ item }}
   when: postfix_dmarc
   with_items:
   - opendmarc
 
 - name: Install postfix-pcre
   apt: pkg=postfix-pcre
-  when: postfix_rewrite_sender_address != ""
+  when: postfix_rewrite_sender_address
